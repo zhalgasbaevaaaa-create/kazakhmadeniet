@@ -623,13 +623,13 @@ h1 {
   font-size: clamp(1.2rem, 2.2vw, 2rem);
 }
 
-.slide-gallery {
+.visual-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
 }
 
-.slide-gallery figure {
+.visual-gallery figure {
   margin: 0;
   overflow: hidden;
   border-radius: 20px;
@@ -637,25 +637,25 @@ h1 {
   background: rgba(0, 0, 0, .25);
 }
 
-.slide-gallery a {
+.visual-gallery a {
   display: block;
   text-decoration: none;
 }
 
-.slide-gallery img {
+.visual-gallery img {
   width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
   object-fit: cover;
 }
 
-.slide-gallery figcaption {
+.visual-gallery figcaption {
   padding: 10px 12px 12px;
   color: rgba(248, 237, 220, .72);
   font-size: .88rem;
 }
 
-.section-card.theme-sand .slide-gallery figcaption {
+.section-card.theme-sand .visual-gallery figcaption {
   color: rgba(29, 17, 8, .72);
 }
 
@@ -664,39 +664,27 @@ h1 {
   gap: 16px;
 }
 
-.pdf-page-text {
+.explanation-card {
   padding: 18px;
   border-radius: 20px;
   background: rgba(0, 0, 0, .2);
   border: 1px solid rgba(216, 180, 93, .18);
 }
 
-.section-card.theme-sand .pdf-page-text {
+.section-card.theme-sand .explanation-card {
   background: rgba(255, 255, 255, .42);
   border-color: rgba(127, 75, 38, .16);
 }
 
-.pdf-page-text h4 {
-  color: var(--gold-2);
-  font-size: 1rem;
-  margin: 0 0 10px;
-}
-
-.section-card.theme-sand .pdf-page-text h4 {
-  color: #7c531a;
-}
-
-.pdf-page-text pre {
+.explanation-card p {
   margin: 0;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  color: rgba(248, 237, 220, .88);
-  font-size: clamp(.94rem, 1.28vw, 1.08rem);
-  line-height: 1.7;
+  color: rgba(248, 237, 220, .9);
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  line-height: 1.85;
   letter-spacing: .01em;
 }
 
-.section-card.theme-sand .pdf-page-text pre {
+.section-card.theme-sand .explanation-card p {
   color: rgba(29, 17, 8, .86);
 }
 
