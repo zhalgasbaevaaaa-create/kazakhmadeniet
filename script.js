@@ -49,7 +49,7 @@ function createSectionCard(section, index) {
   closeButton.className = 'close-card';
   closeButton.type = 'button';
   closeButton.setAttribute('aria-label', `${section.title} бөлімін жабу`);
-  closeButton.innerHTML = '<span aria-hidden="true">×</span> Жабу';
+  closeButton.innerHTML = '<span aria-hidden="true">×</span> Артқа';
   article.appendChild(closeButton);
 
   const cover = document.createElement('div');
@@ -92,7 +92,7 @@ function createSectionCard(section, index) {
   footer.className = 'card-footer';
   const open = document.createElement('span');
   open.className = 'open-mini';
-  open.textContent = 'Толық экранда ашу';
+  open.textContent = 'Кеңейтіп ашу';
   const count = document.createElement('span');
   count.className = 'page-count';
   count.textContent = `${section.visuals.length} материал`;
@@ -157,8 +157,8 @@ function createExpandedContent(section) {
     const openButton = document.createElement('button');
     openButton.type = 'button';
     openButton.className = 'visual-open';
-    openButton.textContent = 'Толық экранға шығару';
-    openButton.setAttribute('aria-label', `${label} толық экранға шығару`);
+    openButton.textContent = 'Кеңейтіп қарау';
+    openButton.setAttribute('aria-label', `${label} кеңейтіп қарау`);
     openButton.addEventListener('click', (event) => {
       event.stopPropagation();
       openMaterialViewer(item.image, image.alt, label);
@@ -206,11 +206,11 @@ function createMaterialViewer() {
   viewer.className = 'material-viewer';
   viewer.setAttribute('role', 'dialog');
   viewer.setAttribute('aria-modal', 'true');
-  viewer.setAttribute('aria-label', 'Көрнекі материалды толық экранда қарау');
+  viewer.setAttribute('aria-label', 'Көрнекі материалды кеңейтіп қарау');
   viewer.innerHTML = `
     <div class="material-viewer-toolbar">
       <strong class="material-viewer-title">Көрнекі материал</strong>
-      <button class="material-viewer-close" type="button" aria-label="Көрнекі материалды жабу">× Жабу</button>
+      <button class="material-viewer-close" type="button" aria-label="Көрнекі материалдан қайту">× Артқа</button>
     </div>
     <div class="material-viewer-stage">
       <img class="material-viewer-image" alt="" />
