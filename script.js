@@ -5,6 +5,7 @@ const sourcesList = document.querySelector('#sources-list');
 const filters = [...document.querySelectorAll('.filter')];
 const siteTitle = document.querySelector('#site-title');
 const siteSubtitle = document.querySelector('#site-subtitle');
+const materialViewer = createMaterialViewer();
 
 siteTitle.textContent = data.title;
 siteSubtitle.textContent = data.subtitle;
@@ -105,7 +106,7 @@ function createSectionCard(section, index) {
       closeSection(article);
       return;
     }
-    if (event.target.closest('a') || article.classList.contains('active')) return;
+    if (event.target.closest('a') || event.target.closest('button') || article.classList.contains('active')) return;
     openSection(article);
   });
 
@@ -144,18 +145,27 @@ function createExpandedContent(section) {
 
   section.visuals.forEach((item, index) => {
     const figure = document.createElement('figure');
-    const link = document.createElement('a');
-    link.href = item.image;
-    link.target = '_blank';
-    link.rel = 'noreferrer noopener';
     const image = document.createElement('img');
+    const label = `Көрнекі материал ${index + 1}`;
     image.src = item.image;
-    image.alt = `${section.title}: көрнекі материал ${index + 1}`;
+    image.alt = `${section.title}: ${label}`;
     image.loading = 'lazy';
-    link.appendChild(image);
+
     const caption = document.createElement('figcaption');
-    caption.textContent = `Көрнекі материал ${index + 1}`;
-    figure.append(link, caption);
+    const captionText = document.createElement('span');
+    captionText.textContent = label;
+    const openButton = document.createElement('button');
+    openButton.type = 'button';
+    openButton.className = 'visual-open';
+    openButton.textContent = 'Толық экранға шығару';
+    openButton.setAttribute('aria-label', `${label} толық экранға шығару`);
+    openButton.addEventListener('click', (event) => {
+      event.stopPropagation();
+      openMaterialViewer(item.image, image.alt, label);
+    });
+
+    caption.append(captionText, openButton);
+    figure.append(image, caption);
     gallery.appendChild(figure);
   });
   galleryBlock.append(galleryTitle, gallery);
@@ -191,22 +201,80 @@ function createExpandedContent(section) {
   return wrapper;
 }
 
+function createMaterialViewer() {
+  const viewer = document.createElement('div');
+  viewer.className = 'material-viewer';
+  viewer.setAttribute('role', 'dialog');
+  viewer.setAttribute('aria-modal', 'true');
+  viewer.setAttribute('aria-label', 'Көрнекі материалды толық экранда қарау');
+  viewer.innerHTML = `
+    <div class="material-viewer-toolbar">
+      <strong class="material-viewer-title">Көрнекі материал</strong>
+      <button class="material-viewer-close" type="button" aria-label="Көрнекі материалды жабу">× Жабу</button>
+    </div>
+    <div class="material-viewer-stage">
+      <img class="material-viewer-image" alt="" />
+    </div>
+  `;
+
+  viewer.querySelector('.material-viewer-close').addEventListener('click', () => closeMaterialViewer());
+  viewer.addEventListener('click', (event) => {
+    if (event.target === viewer) closeMaterialViewer();
+  });
+  document.body.appendChild(viewer);
+  return viewer;
+}
+
+function openMaterialViewer(src, alt, title) {
+  const image = materialViewer.querySelector('.material-viewer-image');
+  const heading = materialViewer.querySelector('.material-viewer-title');
+  image.src = src;
+  image.alt = alt;
+  heading.textContent = title;
+  materialViewer.classList.add('active');
+  updateScrollLock();
+  materialViewer.querySelector('.material-viewer-close').focus({ preventScroll: true });
+  if (materialViewer.requestFullscreen) {
+    materialViewer.requestFullscreen().catch(() => {});
+  }
+}
+
+function closeMaterialViewer() {
+  materialViewer.classList.remove('active');
+  const image = materialViewer.querySelector('.material-viewer-image');
+  image.removeAttribute('src');
+  if (document.fullscreenElement === materialViewer && document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  }
+  updateScrollLock();
+}
+
 function openSection(card) {
   grid.classList.add('has-active');
   card.classList.add('active');
-  document.body.classList.add('no-scroll');
+  updateScrollLock();
   card.querySelector('.close-card').focus({ preventScroll: true });
 }
 
 function closeSection(card) {
   card.classList.remove('active');
   grid.classList.remove('has-active');
-  document.body.classList.remove('no-scroll');
+  updateScrollLock();
   card.focus({ preventScroll: true });
+}
+
+function updateScrollLock() {
+  const sectionOpen = Boolean(document.querySelector('.section-card.active'));
+  const materialOpen = materialViewer.classList.contains('active');
+  document.body.classList.toggle('no-scroll', sectionOpen || materialOpen);
 }
 
 document.addEventListener('keydown', (event) => {
   if (event.key !== 'Escape') return;
+  if (materialViewer.classList.contains('active')) {
+    closeMaterialViewer();
+    return;
+  }
   const active = document.querySelector('.section-card.active');
   if (active) closeSection(active);
 });
