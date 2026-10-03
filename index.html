@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Қазақ мәдениеті туралы PDF презентация негізінде жасалған білім беру сайты." />
+  <title>Қазақ мәдениеті | Білім беру сайты</title>
+  <link rel="preload" href="assets/fonts/Lora-400.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ornament-bg" aria-hidden="true"></div>
+
+  <header class="hero" id="top">
+    <nav class="topbar" aria-label="Негізгі мәзір">
+      <a class="brand" href="#top" aria-label="Басты бетке өту">
+        <span class="brand-mark">ҚМ</span>
+        <span>Қазақ мәдениеті</span>
+      </a>
+      <div class="top-links">
+        <a href="#sections">Бөлімдер</a>
+        <a href="#sources">Дереккөздер</a>
+      </div>
+    </nav>
+
+    <div class="hero-grid">
+      <section class="hero-copy">
+        <p class="eyebrow">PDF презентация негізінде</p>
+        <h1 id="site-title">Қазақ халқы мәдениеті тарихи өлшемде</h1>
+        <p class="lead" id="site-subtitle">Қазақ халқының мәдени мұрасын сараптау</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#sections">Бөлімдерді ашу</a>
+          <span class="helper-text">Әр карточканы басқанда бөлім толық экранға ашылады.</span>
+        </div>
+      </section>
+      <aside class="hero-visual" aria-label="Презентация суреті">
+        <img src="assets/slides/page-01.jpg" alt="Қазақ мәдениеті презентациясының бірінші слайды" />
+        <div class="hero-card-note">
+          <strong>Lora</strong> қарпі, қазақша әріптер: ә, і, ң, ғ, ү, ұ, қ, ө, һ.
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro-panel" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow">Құрылымы</p>
+        <h2 id="intro-title">Мәдени ерекшеліктер бойынша жіктелген бөлімдер</h2>
+      </div>
+      <p>
+        Сайттағы мәтіндер PDF файлдан алынды. Суреттер бөлімдерге PDF слайдтарының түпнұсқа көрінісі ретінде қойылды. Мәтіні аз бөлімдерге ғана «Қосымша тексерілген дерек» белгісімен академиялық/ресми дереккөздер қосылды.
+      </p>
+    </section>
+
+    <section class="section-controls" aria-label="Бөлімдерді сүзу">
+      <button class="filter active" data-filter="all" type="button">Барлығы</button>
+      <button class="filter" data-filter="Материалдық мәдениет" type="button">Материалдық</button>
+      <button class="filter" data-filter="Рухани мәдениет" type="button">Рухани</button>
+      <button class="filter" data-filter="Салт-дәстүр және әдет-ғұрып" type="button">Салт-дәстүр</button>
+      <button class="filter" data-filter="Мұра және құндылықтар" type="button">Мұра</button>
+    </section>
+
+    <section class="sections-wrap" id="sections" aria-labelledby="sections-title">
+      <div class="section-heading">
+        <p class="eyebrow">Интерактивті бөлімдер</p>
+        <h2 id="sections-title">Қазақ мәдениеті тақырыптары</h2>
+      </div>
+      <div class="sections-grid" id="sections-grid"></div>
+    </section>
+
+    <section class="sources" id="sources" aria-labelledby="sources-title">
+      <p class="eyebrow">Тексерілген дереккөздер</p>
+      <h2 id="sources-title">PDF-тен тыс қосылған деректердің сілтемелері</h2>
+      <ul id="sources-list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Қазақ мәдениеті білім беру сайты · PDF материалдары негізінде жасалды.</p>
+    <a href="#top">Жоғарыға қайту</a>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
